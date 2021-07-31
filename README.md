@@ -38,7 +38,7 @@ The recognized tokens:
 
 The program allows two types of input, selected at the start of execution: 
 
-1. ```.txt``` files, like the `input.txt` in this folder
+1. ```.txt``` files, like the file `input.txt` in this folder
 2. `typing` the pseudo code into the program
 
 ## Pseudocode 
