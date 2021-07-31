@@ -26,7 +26,7 @@ public class SimpleParser {
     }
 
     private void match(Token token) {
-        System.out.println("|" + " -> token: " +lookAhead.getType() + " - " + lookAhead.getAttribute()); 
+        printToken(token); 
         if (lookAhead.getType() == token.getType() && lookAhead.getAttribute() == token.getAttribute()) {
             lookAhead = lexer.nextToken();
         } else {
@@ -56,7 +56,7 @@ public class SimpleParser {
         } else if (lookAhead.getType() == ETokenType.PRINT) {
             imp(); 
         } else {
-            throw new RuntimeException(); 
+            throw new SimpleParserException("\n *** Parser Error! Waiting for a VAR or a PRINT token  *** \n"); 
         }
     }
 
@@ -134,11 +134,19 @@ public class SimpleParser {
             match(lookAhead);//-> VAR
             return symbolTable.getSymbolOnTable(name); 
         } else {
-            throw new RuntimeException(); 
+            throw new SimpleParserException("\n *** Parser Error! Waiting for a OPEN or a NUMBER or a VAR token  *** \n"); 
         }
     }    
 
     private void buildOutput() {
         output = sb.toString(); 
+    }
+    
+    private void printToken(Token token){
+        if (token.getAttribute() != null) {
+            System.out.println("|" + " - token: " +lookAhead.getType() + " - " + lookAhead.getAttribute()); 
+        } else {
+            System.out.println("|" + " - token: " +lookAhead.getType()); 
+        }
     }
 }
